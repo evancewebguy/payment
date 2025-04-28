@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    name: payment
+    generate-unique-name: false
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id:  #YOUR_GOOGLE_CLIENT_ID
+            client-secret: #YOUR_GOOGLE_CLIENT_SECRET
+            scope: profile, email
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
+            token-uri: https://www.googleapis.com/oauth2/v4/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-name-attribute: sub
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
